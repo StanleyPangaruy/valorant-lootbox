@@ -1,0 +1,72 @@
+/* Ensure full-screen dark background */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #0f1923;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* You can use center if you want vertical centering too */
+  padding: 2rem;
+  background-color: #0f1923;
+  color: white;
+  text-align: center;
+}
+
+/* Button styles */
+button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  margin: 1rem;
+  cursor: pointer;
+  background: #1f2a3c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+/* Lootbox drop card */
+.drop-card {
+  border: 4px solid;
+  border-radius: 16px;
+  padding: 1rem;
+  background: #1f2a3c;
+  margin-top: 2rem;
+  display: inline-block;
+}
+
+.drop-card img {
+  width: 300px;
+  margin-bottom: 1rem;
+}
+
+/* History section */
+.history-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.history-card {
+  border: 2px solid;
+  border-radius: 8px;
+  padding: 0.5rem;
+  width: 120px;
+  background: #1a2633;
+  color: white;
+  text-align: center;
+}
+
+.history-card img {
+  width: 100%;
+  border-radius: 4px;
+}
