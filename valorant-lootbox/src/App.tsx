@@ -10,28 +10,28 @@ interface Skin {
 }
 
 const RARITY_COLORS: Record<string, string> = {
-  common: '#aaa',
-  rare: '#3498db',
-  epic: '#9b59b6',
+  select: '#aaa',
+  deluxe: '#3498db',
+  premium: '#9b59b6',
   ultra: '#e67e22',
-  legendary: '#f1c40f',
+  exclusive: '#f1c40f',
 };
 
 const RARITY_PROBABILITIES: Record<string, number> = {
-  common: 0.7992,
-  rare: 0.1598,
-  epic: 0.032,
+  select: 0.7992,
+  deluxe: 0.1598,
+  premium: 0.032,
   ultra: 0.0064,
-  legendary: 0.0026,
+  exclusive: 0.0026,
 };
 
 function App() {
   const [skinPool, setSkinPool] = useState<Record<string, Skin[]>>({
-    common: [],
-    rare: [],
-    epic: [],
+    select: [],
+    deluxe: [],
+    premium: [],
     ultra: [],
-    legendary: [],
+    exclusive: [],
   });
 
   const [drop, setDrop] = useState<Skin | null>(null);
@@ -45,19 +45,19 @@ function App() {
       const rarityMap: Record<string, string> = {};
       tiersRes.data.data.forEach((tier: any) => {
         const name = tier.displayName.toLowerCase();
-        if (name.includes('select') || name.includes('standard')) rarityMap[tier.uuid] = 'common';
-        else if (name.includes('deluxe')) rarityMap[tier.uuid] = 'rare';
-        else if (name.includes('premium')) rarityMap[tier.uuid] = 'epic';
+        if (name.includes('select') || name.includes('standard')) rarityMap[tier.uuid] = 'select';
+        else if (name.includes('deluxe')) rarityMap[tier.uuid] = 'deluxe';
+        else if (name.includes('premium')) rarityMap[tier.uuid] = 'premium';
         else if (name.includes('ultra')) rarityMap[tier.uuid] = 'ultra';
-        else if (name.includes('exclusive')) rarityMap[tier.uuid] = 'legendary';
+        else if (name.includes('exclusive')) rarityMap[tier.uuid] = 'exclusive';
       });
 
       const pool: Record<string, Skin[]> = {
-        common: [],
-        rare: [],
-        epic: [],
+        select: [],
+        deluxe: [],
+        premium: [],
         ultra: [],
-        legendary: [],
+        exclusive: [],
       };
 
       weaponsRes.data.data.forEach((weapon: any) => {
