@@ -107,7 +107,7 @@ function App() {
 
       {drop && (
         <div className="drop-card" style={{ borderColor: RARITY_COLORS[drop.rarity] }}>
-          <img src={drop.icon} alt={drop.name} />
+          <img src={drop.icon} alt={drop.name} className="skin-img"/>
           <h2>{drop.name}</h2>
           <p>{drop.weapon}</p>
           <p style={{ color: RARITY_COLORS[drop.rarity] }}>Rarity: {drop.rarity.toUpperCase()}</p>
@@ -120,7 +120,7 @@ function App() {
           <div className="history-grid">
             {history.map((item, i) => (
               <div key={i} className="history-card" style={{ borderColor: RARITY_COLORS[item.rarity] }}>
-                <img src={item.icon} alt={item.name} />
+                <img src={item.icon} alt={item.name} className="skin-img"/>
                 <p>{item.name}</p>
                 <small style={{ color: RARITY_COLORS[item.rarity] }}>{item.rarity.toUpperCase()}</small>
               </div>
