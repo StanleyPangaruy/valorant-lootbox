@@ -36,6 +36,7 @@ function App() {
 
   const [drop, setDrop] = useState<Skin | null>(null);
   const [history, setHistory] = useState<Skin[]>([]);
+  const [showEmbed, setShowEmbed] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,8 +78,24 @@ function App() {
       setSkinPool(pool);
     };
 
+    
+
     fetchData();
   }, []);
+
+  useEffect(() => {
+  if (showEmbed) {
+    const script = document.createElement('script');
+    script.src = 'https://tenor.com/embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }
+}, [showEmbed]);
+
 
   const weightedRandom = () => {
     const r = Math.random();
@@ -91,28 +108,61 @@ function App() {
   };
 
   const openLootbox = () => {
-    const rarity = weightedRandom();
-    const options = skinPool[rarity];
-    if (!options.length) return;
+    setShowEmbed(true);
+    setDrop(null);
+    setTimeout(() => {
+      const rarity = weightedRandom();
+      const options = skinPool[rarity];
+      if (!options.length) return;
 
-    const chosen = options[Math.floor(Math.random() * options.length)];
-    setDrop(chosen);
-    setHistory(prev => [chosen, ...prev.slice(0, 19)]); // Keep last 20 drops
+      const chosen = options[Math.floor(Math.random() * options.length)];
+      setDrop(chosen);
+      setHistory(prev => [chosen, ...prev.slice(0, 19)]);
+      setShowEmbed(false);
+    }, 3000); // Adjust this if you want a longer GIF duration
   };
+
 
   return (
     <div className="App">
       <h1>Valorant Lootbox</h1>
       <button onClick={openLootbox}>Open Lootbox</button>
 
-      {drop && (
+      {showEmbed && (
+        <div style={{ width: '100%', maxWidth: '400px', height: '400px', margin: '0 auto' }}>
+          <div
+            className="tenor-gif-embed"
+            data-postid="13110493423513625082"
+            data-share-method="host"
+            data-aspect-ratio="1"
+            data-width="100%"
+          >
+            <a href="https://tenor.com/view/nifty-league-nifty-smashers-loot-box-lootbox-loot-gif-13110493423513625082">
+              Nifty League Nifty Smashers GIF
+            </a>
+            from
+            <a href="https://tenor.com/search/nifty+league-gifs">Nifty League GIFs</a>
+          </div>
+        </div>
+      )}
+
+      {drop && !showEmbed && (
+        <div className="drop-card" style={{ borderColor: RARITY_COLORS[drop.rarity] }}>
+          <img src={drop.icon} alt={drop.name} className="skin-img" />
+          <h2>{drop.name}</h2>
+          <p>{drop.weapon}</p>
+          <p style={{ color: RARITY_COLORS[drop.rarity] }}>Rarity: {drop.rarity.toUpperCase()}</p>
+        </div>
+      )}
+
+      {/* {drop && (
         <div className="drop-card" style={{ borderColor: RARITY_COLORS[drop.rarity] }}>
           <img src={drop.icon} alt={drop.name} className="skin-img"/>
           <h2>{drop.name}</h2>
           <p>{drop.weapon}</p>
           <p style={{ color: RARITY_COLORS[drop.rarity] }}>Rarity: {drop.rarity.toUpperCase()}</p>
         </div>
-      )}
+      )} */}
 
       {history.length > 0 && (
         <>
