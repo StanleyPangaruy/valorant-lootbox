@@ -140,7 +140,6 @@ function App() {
             <a href="https://tenor.com/view/nifty-league-nifty-smashers-loot-box-lootbox-loot-gif-13110493423513625082">
               Nifty League Nifty Smashers GIF
             </a>
-            from
             <a href="https://tenor.com/search/nifty+league-gifs">Nifty League GIFs</a>
           </div>
         </div>

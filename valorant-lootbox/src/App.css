@@ -88,3 +88,7 @@ button {
   background: #1f2a3c;
   color: white;
 }
+
+.tenor-gif-embed a {
+  display: none !important;
+}
